@@ -64,8 +64,8 @@
                 font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
                 vertical-align: baseline;
                 font-size: 16px;
-                max-width: 42rem;
-                min-width: 480px;
+                max-width: 768px;
+                min-width: 768px;
                 padding: 2rem;
                 padding-top: 0.5rem;
                 margin-left: auto;
@@ -179,7 +179,24 @@
                 line-height: 1.5em;
                 list-style: none;
             }
-
+            
+            .ul {
+                list-style: disc;
+            }
+            .subul {
+                margin: 0;
+            }
+            .subul {
+                list-style-type: none;
+            }
+            .subul> li {
+                text-indent: -5px;
+            }
+            .subul > li:before {
+                font-weight: bold;
+                content: "- ";
+                text-indent: -5px;
+            }
             ol {
                 padding-left: 20px;
                 line-height: 1.5em;
@@ -229,12 +246,15 @@
             }
 
             img {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
+                /* max-height: 200px; */
+                /* display: block; */
+                /* margin-left: auto;
+                margin-right: auto; */
                 margin-bottom: 10px;
                 margin-top: 10px;
-                width: 100%;
+                max-width: 500px;
+                min-width: 500px;
+                /* width: 100%; */
                 border: 1px solid #777777;
             }
 
@@ -886,7 +906,7 @@
                     width: 20px;
                 }
 
-                img {
+                /* img {
                     display: block;
                     margin-left: auto;
                     margin-right: auto;
@@ -895,7 +915,7 @@
                     width: 100%;
                     max-width: 400px;
                     border: 1px solid #777777;
-                }
+                } */
             }
         </style>
         <script type="application/javascript">
@@ -996,6 +1016,26 @@
                 </p>
             </section>
             <section>
+                <p style="margin-bottom: 0.5em;">
+                    In order to make the account accessible without using multi-factor authentication, you must <b>temporarily disable Microsoft security defaults</b>.<br>
+                    <p style="color:red;">Warning!<br>Disabling Microsoft security defaults leaves your organization vulnerable to common identity-related attacks.</p>
+                    The major implications for disabling Microsoft security defaults are as follows:
+                    <ul class="ul">
+                        <li>No longer require all users to register for Azure AD Multi-Factor Authentication</li>
+                        <li>No longer require administrators to pass multifactor authentication</li>
+                        <li>No longer require users to pass MFA whenever Azure AD deems necessary</li>
+                        <li>Unblock legacy authentication protocols</li>
+                        <li>
+                            No longer require MFA for these services:
+                            <ul class="subul">
+                                <li>Azure portal</li>
+                                <li>Azure PowerShell</li>
+                                <li>Azure CLI</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    It is important to <b>restore Microsoft security defaults</b> once you're finished accessing the target account by navigating to <a href="https://aad.portal.azure.com/#blade/Microsoft_AAD_ConditionalAccess/SecurityDefaults" target="_blank">Manage security defaults</a>, selecting <b>Enabled (recommended)</b> from the drop-down menu, and clicking <b>Save</b>.
+                </p>
                 <h3 id="powershell-setup">
                     Disabling Security Defaults
                     <a href="#powershell-setup">
@@ -1008,38 +1048,60 @@
                         </span>
                     </a>
                 </h3>
-                <p style="margin-bottom: 0.5em;">
-                    In order to make the account accessible without using multi-factor authentication, you must <b>disable Microsoft security defaults</b>.<br>
-                    <p style="color:red;">Warning! Disabling Microsoft security defaults is indeed as dangerous as it sounds.</p>
-                    It is important to <b>restore Microsoft security defaults</b> once you're finished accessing the target account by navigating to <a href="https://aad.portal.azure.com/#blade/Microsoft_AAD_ConditionalAccess/SecurityDefaults" target="_blank">Manage security defaults</a>, selecting <b>Enabled (recommended)</b> from the drop-down menu, and clicking <b>Save</b>.
-                </p>
                 <ol class="scrol" style="text-indent: -18px; padding-left: 2.5rem; margin-top: 0px;">
                     <li>
                         Navigate to your <a href="https://aad.portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview" target="_blank">Azure Active Directory</a> overview page and click <b>Properties</b>.
-                        <img src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/1.png" style="display: inline;">
+                        <a href="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/1.png" target="_blank" title="View fullsize image in new tab">
+                            <img src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/1.png">
+                        </a>
                     </li>
                     <li>
                         Scroll all the way down. Click the link that reads <a href="https://aad.portal.azure.com/#blade/Microsoft_AAD_ConditionalAccess/SecurityDefaults" target="_blank">Manage security defaults (or click here)</a>. 
-                        <img src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/2.png" style="display: inline;">
+                        <a href="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/2.png" target="_blank" title="View fullsize image in new tab">
+                            <img src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/2.png">
+                        </a>
                     </li>
                     <li>
                         From the drop-down menu, select <b>Disabled (not recommended)</b>. Then click <b>Save</b>.
-                        <img src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/3.png" style="display: inline;">
+                        <a href="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/3.png" target="_blank" title="View fullsize image in new tab">
+                            <img src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/3.png">
+                        </a>
+                    </li>
+                </ol>
+                <h3 id="powershell-setup">
+                    Disabling MFA Per-User
+                    <a href="#powershell-setup">
+                        <span class="anchor" onmouseover="onMouseOver(this);" onmouseleave="onMouseLeave(this);" data-clipboard-text="#powershell-setup" style="position: relative;">
+                            <span style="position: absolute; top: 70%; left: 0.75rem; transform: translateY(-50%); right: -2rem;">
+                                <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26px" height="26px">
+                                    <path d="M 5.5625 0 C 4.136719 0 2.707031 0.542969 1.625 1.625 C -0.539063 3.789063 -0.539063 7.335938 1.625 9.5 L 5.28125 13.15625 C 5.667969 13.554688 6.304688 13.558594 6.703125 13.171875 C 7.101563 12.785156 7.105469 12.148438 6.71875 11.75 L 3.03125 8.0625 C 1.632813 6.664063 1.632813 4.429688 3.03125 3.03125 C 4.429688 1.632813 6.664063 1.632813 8.0625 3.03125 L 12.96875 7.9375 C 14.367188 9.335938 14.367188 11.570313 12.96875 12.96875 C 12.804688 13.132813 12.621094 13.25 12.4375 13.375 C 11.980469 13.6875 11.859375 14.308594 12.171875 14.765625 C 12.484375 15.222656 13.105469 15.34375 13.5625 15.03125 C 13.847656 14.835938 14.125 14.625 14.375 14.375 C 16.539063 12.210938 16.539063 8.664063 14.375 6.5 L 9.5 1.625 C 8.417969 0.542969 6.988281 0 5.5625 0 Z M 10.78125 8.875 C 10.738281 8.882813 10.695313 8.894531 10.65625 8.90625 C 10.507813 8.9375 10.371094 9 10.25 9.09375 C 10.039063 9.253906 9.820313 9.429688 9.625 9.625 C 7.460938 11.789063 7.460938 15.335938 9.625 17.5 L 14.5 22.375 C 16.664063 24.539063 20.210938 24.539063 22.375 22.375 C 24.539063 20.210938 24.539063 16.664063 22.375 14.5 L 18.71875 10.875 C 18.476563 10.578125 18.089844 10.441406 17.714844 10.527344 C 17.34375 10.613281 17.050781 10.90625 16.964844 11.277344 C 16.878906 11.652344 17.015625 12.039063 17.3125 12.28125 L 20.96875 15.9375 C 22.367188 17.335938 22.367188 19.570313 20.96875 20.96875 C 19.570313 22.367188 17.335938 22.367188 15.9375 20.96875 L 11.03125 16.0625 C 9.632813 14.664063 9.632813 12.429688 11.03125 11.03125 C 11.152344 10.90625 11.300781 10.820313 11.4375 10.71875 C 11.839844 10.472656 12.015625 9.976563 11.855469 9.53125 C 11.699219 9.085938 11.25 8.8125 10.78125 8.875 Z"></path>
+                                </svg>
+                            </span>
+                        </span>
+                    </a>
+                </h3>
+                <ol>
+                    <li>
+                        Navigate to your <a href="https://aad.portal.azure.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/AllUsers" target="_blank">Azure Active Directory Users</a> page and click on <a href="https://account.activedirectory.windowsazure.com/usermanagement/multifactorverification.aspx?tenantId=4ffca0b6-c3a1-43aa-a93d-3768045fd95a&culture=en-us&requestInitiatedContext=users" target="_blank">Per-user multifactor authentication (or click here)</a>.<br>
+                        <a href="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/4.png" target="_blank" title="View fullsize image in new tab">
+                            <img src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/4.png">
+                        </a>
                     </li>
                     <li>
-                        Now, navigate to your <a href="https://aad.portal.azure.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/AllUsers" target="_blank">Azure Active Directory Users</a> page and click on <a href="https://account.activedirectory.windowsazure.com/usermanagement/multifactorverification.aspx?tenantId=4ffca0b6-c3a1-43aa-a93d-3768045fd95a&culture=en-us&requestInitiatedContext=users" target="_blank">Per-user multifactor authentication (or click here)</a>.
-                        <img src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/4.png" style="display: inline;">
-                    </li>
-                    <li>
-                        The <b>Multi-factor authentication</b> page will open in a new window. From the list, find the user for which you need to disable multi-factor authentication, check the box next to their name, and then click <b>Disable</b> on the right.
-                        <img src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/5.png" style="display: inline;">
+                        The <b>Multi-factor authentication</b> page will open in a new window. From the list, find the user for which you need to disable multi-factor authentication, check the box next to their name, and then click <b>Disable</b> on the right.<br>
+                        <a href="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/5.png" target="_blank" title="View fullsize image in new tab">
+                            <img src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/5.png">
+                        </a>
+                        
                     </li>
                     <li>
                         Click <b>Yes</b> when prompted to confirm the changes.
-                        <img src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/6.png" style="display: inline;">
+                        <a href="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/6.png" target="_blank" title="View fullsize image in new tab">
+                            <img src="https://nlp-137cf635-6c92-49b5-b943-f5c8c75e686f.s3.us-east-2.amazonaws.com/6.png">
+                        </a>                        
                     </li>
                     <li>
-                        Open an <b>incognito</b> window (usually <b>CTRL + SHIFT + N</b>) and navigate to <a href="https://outlook.office365.com/" target="_blank">https://outlook.office365.com/</a>. Given that you have the correct password for the account, you may now test to see whether you can login with the target user's credentials without being prompted to use multi-factor authentication.
+                        Open an <b>incognito</b> window (usually <b>CTRL+SHIFT+N</b>) and navigate to <a href="https://outlook.office365.com/" target="_blank">https://outlook.office365.com/</a>. Given that you have the correct password for the account, you may now test to see whether you can login with the target user's credentials without being prompted to use multi-factor authentication.
                     </li>
                     <li>
                         Don't forget to <b>restore Microsoft security defaults</b> once you're finished accessing the target account by navigating to <a href="https://aad.portal.azure.com/#blade/Microsoft_AAD_ConditionalAccess/SecurityDefaults" target="_blank">Manage security defaults</a>, selecting <b>Enabled (recommended)</b> from the drop-down menu, and clicking <b>Save</b>.
